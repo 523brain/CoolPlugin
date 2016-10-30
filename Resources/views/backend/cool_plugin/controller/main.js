@@ -22,8 +22,11 @@ Ext.define( 'Shopware.apps.CoolPlugin.controller.Main', {
     onAddBeers: function ( beers ) {
         var me = this,
             coolRecord = me.coolStore.first();
-        var showBeers = parseInt(beers) + parseInt(coolRecord.get( 'beersInStore' ));
+        var showBeers = me.addBeers(beers, coolRecord.get( 'beersInStore' ));
         Shopware.Notification.createGrowlMessage( 'Beer!', 'Beers:' + showBeers );
+    },
+    addBeers: function ( beersInShop, beersInStore ) {
+        return parseInt(beersInShop) + parseInt(beersInStore);
     }
 });
 //{/block}
