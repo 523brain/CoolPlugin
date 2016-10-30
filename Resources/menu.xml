@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/menu.xsd">
     <entries>
-        <entry>
+        <entry isRootMenu="true">
             <name>Beer Time</name>
             <label lang="en">Cool Plugin</label>
             <label lang="de">Cool Plugin</label>
             <controller>CoolPlugin</controller>
             <action>index</action>
             <class>sprite-metronome</class>
-            <parent>NULL</parent>
+            <!--<action></action>-->
+            <!--<parent></parent>-->
+            <active>true</active>
+            <position>1</position>
+            <!--<onclick></onclick>-->
         </entry>
     </entries>
 </menu>
