@@ -28,7 +28,6 @@ class CoolPlugin extends Plugin
      */
     public function install(InstallContext $context)
     {
-        $this->registerNamespaces();
         $installer = new Installer($this->container);
         $installer->install();
     }
@@ -36,29 +35,46 @@ class CoolPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Front_StartDispatch', 'onStartDispatch',
-            'Enlight_Controller_Dispatcher_ControllerPath_Backend_CoolPlugin', 'registerController'
+            'Enlight_Controller_Front_StartDispatch' => 'onStartDispatch',
+            'Enlight_Controller_Action_PostDispatch_Backend_Index' => 'onPostDispatchBackendIndex',
+            'Enlight_Controller_Dispatcher_ControllerPath_Backend_CoolPlugin' => 'registerController'
         ];
     }
 
     public function onStartDispatch(\Enlight_Event_EventArgs $args) {
-        $this->registerNamespaces();
-        $this->container->get('template')->addTemplateDir(
+        $this->container->get('Template')->addTemplateDir(
             $this->getPath() . '/Resources/views/'
         );
     }
 
-    public function registerController(\Enlight_Event_EventArgs $args) {
-        $this->registerNamespaces();
-        $this->container->get('template')->addTemplateDir(
+    /**
+     * @param \Enlight_Controller_EventArgs $args
+     */
+    public function onPostDispatchBackendIndex(\Enlight_Controller_EventArgs $args)
+    {
+        /** @var $action \Enlight_Controller_Action */
+        $action = $args->getSubject();
+        $view = $action->View();
+        $request = $action->Request();
+        $response = $action->Response();
+
+        if (!$request->isDispatched()
+            || $response->isException()
+            || $request->getActionName() != 'index'
+            || !$view->hasTemplate()
+        ) {
+            return;
+        }
+        $this->container->get('Template')->addTemplateDir(
             $this->getPath() . '/Resources/views/'
         );
+    }
 
+    public function registerController(\Enlight_Controller_EventArgs $args) {
+        $this->container->get('Template')->addTemplateDir(
+            $this->getPath() . '/Resources/views/'
+        );
         return $this->getPath() . "/Controllers/Backend/CoolPlugin.php";
-    }
-
-    public function registerNamespaces() {
-        $this->container->get('Loader')->registerNamespace('CoolPlugin', $this->getPath());
     }
 
 }

@@ -1,4 +1,4 @@
-//{block name="backend/plugin_manager/applications"}
+//{block name="backend/cool_plugin/app"}
 Ext.define( 'Shopware.apps.CoolPlugin', {
     extend: 'Enlight.app.SubApplication',
     name: 'Shopware.apps.CoolPlugin',
@@ -14,7 +14,6 @@ Ext.define( 'Shopware.apps.CoolPlugin', {
     launch: function () {
         var me = this,
             controller = me.getController( me.defaultController );
-
         return controller.mainWindow;
     }
 });

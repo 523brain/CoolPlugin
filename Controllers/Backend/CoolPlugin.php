@@ -9,6 +9,7 @@ class Shopware_Controllers_Backend_CoolPlugin extends Shopware_Controllers_Backe
 
     protected $model = 'Shopware\Models\Article\Article';
 
+
     public function getBeersAction(){
         $this->View()->assign(['success' => true, 'data' => ['id' => 1, 'beersInStore' => 40 ]]);
     }

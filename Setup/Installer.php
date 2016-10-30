@@ -2,7 +2,6 @@
 
 namespace CoolPlugin\Setup;
 
-use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Installer

@@ -3,11 +3,11 @@
  */
 Ext.define( 'Shopware.apps.CoolPlugin.view.main.Window', {
     extend: 'Enlight.app.Window',
-    alias: 'widget.cool-main-window',
+    alias: 'widget.mainWindow',
     title: 'Cool App Plugin',
     id: 'mainWindow',
-    height: "90%",
-    width: "50%",
+    height: 250,
+    width: 320,
     border: false,
     autoShow: true,
     layout: 'border',
@@ -15,13 +15,14 @@ Ext.define( 'Shopware.apps.CoolPlugin.view.main.Window', {
         var me = this;
         me.registerEvents();
         me.panel = me.createPanel();
-        me.items = [{
-            xtype: 'container',
-            region: 'center',
-            layout: 'border',
-            items: [ me.panel ]
-        }];
-        me.dockedItems = [ me.getToolbar(), me.getPagingbar() ];
+        me.items = [
+            {
+                xtype: 'container',
+                region: 'center',
+                layout: 'border',
+                items: [ me.panel ]
+            }
+        ];
 
         me.callParent( arguments );
     },
@@ -38,60 +39,32 @@ Ext.define( 'Shopware.apps.CoolPlugin.view.main.Window', {
             width: 300,
             bodyPadding: 10,
             renderTo: Ext.getBody(),
-            items: [{
-                xtype: 'numberfield',
-                anchor: '100%',
-                name: 'bottles',
-                fieldLabel: 'Bottles of Beer',
-                value: 99,
-                maxValue: 99,
-                minValue: 0
-            }],
-            buttons: [{
-                text: 'Take one down, pass it around',
-                handler: function () {
-                    this.up( 'form' ).down( '[name=bottles]' ).spinDown();
-                }
-            },
-                {
-                    text: 'Add the beers from the store',
-                    handler: function () {
-                        this.fire( 'addBeers' , this.up( 'form' ).down( '[name=bottles]' ).getValue());
-                    }
-                }]
-        });
-    },
-    getToolbar: function () {
-        var me = this;
-
-        var toolbar = Ext.create( 'Ext.toolbar.Toolbar', {
-            dock: 'top',
-            ui: 'shopware-ui',
-            cls: 'shopware-toolbar',
             items: [
                 {
-                    iconCls: 'sprite-plus-circle-frame',
-                    text: 'Add Beer',
-                    action: 'addBeers'
-                },
-                {
-                    xtype: 'tbfill'
-                }, {
-                    xtype: 'container',
-                    html: '<p style="padding: 5px">DragAndDrop</p>'
+                    xtype: 'numberfield',
+                    anchor: '100%',
+                    name: 'bottles',
+                    fieldLabel: 'Bottles of Beer',
+                    value: 99,
+                    maxValue: 99,
+                    minValue: 0
                 }
-            ]
+            ],
+            buttons: [
+                    {
+                        text: 'Take one down, pass it around',
+                        handler: function () {
+                            this.up( 'form' ).down( '[name=bottles]' ).spinDown();
+                        }
+                    },
+                    {
+                        text: 'Add stored beers',
+                        handler: function () {
+                            var value = this.up( 'form' ).down( '[name=bottles]' ).getValue();
+                            me.fireEvent( 'addBeers' , value);
+                        }
+                    }
+                ]
         });
-
-        return toolbar;
-    },
-    getPagingbar: function () {
-        var pagingbar = Ext.create( 'Ext.toolbar.Paging', {
-            store: this.store,
-            dock: 'bottom',
-            displayInfo: true
-        });
-
-        return pagingbar;
     }
 });
