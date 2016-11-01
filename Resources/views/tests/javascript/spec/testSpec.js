@@ -1,7 +1,6 @@
 /*
  * Copyright (c) niWde
  */
-
 describe("CoolBeer", function() {
     var app = null,
         value,

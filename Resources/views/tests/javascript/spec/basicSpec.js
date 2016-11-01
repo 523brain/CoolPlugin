@@ -1,7 +1,6 @@
 /*
  * Copyright (c) niWde
  */
-
 describe("Basic Assumptions", function() {
 
     it("has ExtJS4 loaded", function() {

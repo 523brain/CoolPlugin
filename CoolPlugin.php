@@ -1,4 +1,7 @@
 <?php
+/**
+ * Copyright (c) niWde
+ */
 
 namespace CoolPlugin;
 
@@ -7,6 +10,10 @@ use Shopware\Components\Plugin\Context\InstallContext;
 use CoolPlugin\Setup\Installer;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * Class CoolPlugin
+ * @package CoolPlugin
+ */
 class CoolPlugin extends Plugin
 {
     /**
@@ -32,6 +39,9 @@ class CoolPlugin extends Plugin
         $installer->install();
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -41,7 +51,11 @@ class CoolPlugin extends Plugin
         ];
     }
 
-    public function onStartDispatch(\Enlight_Event_EventArgs $args) {
+    /**
+     * @param \Enlight_Event_EventArgs $args
+     */
+    public function onStartDispatch(\Enlight_Event_EventArgs $args)
+    {
         $this->container->get('Template')->addTemplateDir(
             $this->getPath() . '/Resources/views/'
         );
@@ -70,7 +84,11 @@ class CoolPlugin extends Plugin
         );
     }
 
-    public function registerController(\Enlight_Controller_EventArgs $args) {
+    /**
+     * @param \Enlight_Controller_EventArgs $args
+     */
+    public function registerController(\Enlight_Controller_EventArgs $args)
+    {
         $this->container->get('Template')->addTemplateDir(
             $this->getPath() . '/Resources/views/'
         );

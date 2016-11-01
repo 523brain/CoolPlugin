@@ -1,9 +1,16 @@
 <?php
+/**
+ * Copyright (c) niWde
+ */
 
 namespace CoolPlugin\Setup;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class Installer
+ * @package CoolPlugin\Setup
+ */
 class Installer
 {
     /** @var ContainerInterface */

@@ -2,6 +2,7 @@
  * Copyright (c) niWde
  */
 
+//@var required in one of the imports
 var maxParameterLength = 999999999;
 
 Ext.Loader.setConfig({

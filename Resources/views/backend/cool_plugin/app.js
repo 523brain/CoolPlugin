@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) niWde
+ */
 //{block name="backend/cool_plugin/app"}
 Ext.define( 'Shopware.apps.CoolPlugin', {
     extend: 'Enlight.app.SubApplication',
